@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Landing Page – MVP</title>
+  <meta name="description" content="A clean, simple MVP landing page template to validate your product idea." />
+  <style>
+    :root{
+      --bg:#0b0f19;        /* deep navy */
+      --card:#101728;      /* card background */
+      --muted:#7a88a8;     /* muted text */
+      --text:#e8eefc;      /* primary text */
+      --brand:#6ea8fe;     /* accent */
+      --brand-dark:#4d8cf6;/* accent hover */
+      --ok:#2ecc71;
+      --warn:#ffcc66;
+      --radius:16px;
+      --shadow:0 10px 25px rgba(0,0,0,.35);
+      --shadow-soft:0 6px 18px rgba(0,0,0,.25);
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6}
+    a{color:var(--text);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin-inline:auto;padding:24px}
+
+    /* Header */
+    header{position:sticky;top:0;background:linear-gradient(180deg,#0b0f19 70%,rgba(11,15,25,.7));backdrop-filter:saturate(140%) blur(8px);z-index:20;border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#9ee7ff);box-shadow:var(--shadow-soft)}
+    .nav a.button{padding:10px 16px;background:var(--brand);border-radius:12px;color:#0b0f19;font-weight:700;box-shadow:var(--shadow-soft)}
+    .nav a.button:hover{background:var(--brand-dark)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:28px;padding:54px 24px}
+    .hero h1{font-size:clamp(32px,5vw,52px);line-height:1.1;margin:0 0 10px}
+    .hero p{font-size:18px;color:var(--muted);margin:0 0 22px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--muted);font-size:13px}
+    .hero-card{background:radial-gradient(1200px 600px at 20% -10%, rgba(110,168,254,0.25), transparent 60%), var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-cta .primary{background:var(--brand);color:#0b0f19;border:0;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}
+    .hero-cta .primary:hover{background:var(--brand-dark)}
+    .hero-cta .ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.16);padding:12px 16px;border-radius:12px;cursor:pointer}
+    .hero-cta .ghost:hover{border-color:rgba(255,255,255,.28)}
+
+    /* Social proof */
+    .logos{opacity:.9;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;align-items:center;justify-items:center;padding:10px}
+    .logos div{height:36px;opacity:.6;filter:grayscale(100%)}
+
+    /* Features */
+    section{padding:56px 24px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}
+    h2{font-size:clamp(24px,3.5vw,34px);margin:0}
+    .muted{color:var(--muted)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,.06)}
+    .icon{width:42px;height:42px;border-radius:12px;background:rgba(110,168,254,.18);display:grid;place-items:center;margin-bottom:10px}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .price{display:flex;align-items:baseline;gap:6px;margin:10px 0 14px}
+    .price .num{font-size:40px;font-weight:800}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(110,168,254,.18);border:1px solid rgba(255,255,255,.12);font-size:12px;color:var(--muted)}
+    ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    li{display:flex;gap:10px;align-items:flex-start}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .quote{font-style:italic;color:var(--muted)}
+
+    /* FAQ */
+    .faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    details{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,.06)}
+    summary{cursor:pointer;font-weight:700}
+
+    /* CTA */
+    .cta{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:center}
+    .cta .card{background:linear-gradient(120deg,rgba(110,168,254,.18),rgba(255,255,255,.02));}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.06);padding:36px 24px;color:var(--muted)}
+
+    /* Forms */
+    input[type="email"], input[type="text"]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.02);color:var(--text)}
+    .inline-form{display:flex;gap:10px;flex-wrap:wrap}
+    .inline-form button{padding:12px 16px;border-radius:12px;border:0;background:var(--brand);color:#0b0f19;font-weight:800;cursor:pointer}
+    .inline-form button:hover{background:var(--brand-dark)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero,.grid-3,.pricing,.testimonials,.faq,.cta{grid-template-columns:1fr}
+      .logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>YOURPRODUCT</span>
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        &nbsp;&nbsp;
+        <a href="#pricing">Pricing</a>
+        &nbsp;&nbsp;
+        <a href="#faq">FAQ</a>
+        &nbsp;&nbsp;
+        <a href="#cta" class="button">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="container hero">
+    <div>
+      <span class="pill">🚀 MVP Ready • Launch in minutes</span>
+      <h1>Validate your idea with a clean, simple landing page.</h1>
+      <p>Collect emails, show core benefits, and share pricing—all in one responsive page. No frameworks, no build tools—just HTML, CSS, and a hint of JS.</p>
+      <div class="hero-cta">
+        <button class="primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Start Free</button>
+        <button class="ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">See Features</button>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:16px;color:var(--muted);font-size:14px">
+        <div>✅ No signup required</div>
+        <div>✅ Mobile friendly</div>
+        <div>✅ Copy–paste deploy</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="https://picsum.photos/seed/product/960/540" alt="Product preview placeholder" style="border-radius:12px;border:1px solid rgba(255,255,255,.08)">
+      <div class="muted" style="font-size:12px;margin-top:8px">Replace with your real product screenshot.</div>
+    </div>
+  </section>
+
+  <!-- Social proof (optional logos) -->
+  <section class="container" aria-label="Trusted by">
+    <div class="logos">
+      <div><img alt="Logo 1" src="https://picsum.photos/seed/logo1/120/36"></div>
+      <div><img alt="Logo 2" src="https://picsum.photos/seed/logo2/120/36"></div>
+      <div><img alt="Logo 3" src="https://picsum.photos/seed/logo3/120/36"></div>
+      <div><img alt="Logo 4" src="https://picsum.photos/seed/logo4/120/36"></div>
+      <div><img alt="Logo 5" src="https://picsum.photos/seed/logo5/120/36"></div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="container">
+    <div class="section-head">
+      <h2>Everything you need to test demand</h2>
+      <span class="badge">Simple • Fast • Minimal</span>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Fast setup</h3>
+        <p class="muted">Drop this file on any static host (GitHub Pages, Netlify, Vercel) and you’re live.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📧</div>
+        <h3>Email capture</h3>
+        <p class="muted">Collect leads with a lightweight form—no backend required (connect to Formspree or Google Forms later).</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Responsive design</h3>
+        <p class="muted">Looks great on mobile, tablet, and desktop with clean, modern styling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="container">
+    <div class="section-head">
+      <h2>Simple pricing</h2>
+      <span class="muted">Start free, upgrade when you grow.</span>
+    </div>
+    <div class="pricing">
+      <div class="card">
+        <span class="badge">Starter</span>
+        <div class="price"><span class="num">$0</span><span>/mo</span></div>
+        <ul>
+          <li>✅ Email capture</li>
+          <li>✅ Basic analytics</li>
+          <li>❌ Custom domain</li>
+        </ul>
+        <div style="height:10px"></div>
+        <button class="hero-cta primary" style="width:100%">Get Started</button>
+      </div>
+      <div class="card" style="border:1px solid rgba(110,168,254,.35)">
+        <span class="badge">Pro • Most Popular</span>
+        <div class="price"><span class="num">$12</span><span>/mo</span></div>
+        <ul>
+          <li>✅ Everything in Starter</li>
+          <li>✅ Custom domain</li>
+          <li>✅ Priority support</li>
+        </ul>
+        <div style="height:10px"></div>
+        <button class="hero-cta primary" style="width:100%">Upgrade</button>
+      </div>
+      <div class="card">
+        <span class="badge">Teams</span>
+        <div class="price"><span class="num">$29</span><span>/mo</span></div>
+        <ul>
+          <li>✅ 5 collaborators</li>
+          <li>✅ Integrations</li>
+          <li>✅ SLA + SSO</li>
+        </ul>
+        <div style="height:10px"></div>
+        <button class="hero-cta primary" style="width:100%">Contact Sales</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="container">
+    <div class="section-head">
+      <h2>Loved by early adopters</h2>
+      <span class="muted">Real quotes from real users.</span>
+    </div>
+    <div class="testimonials">
+      <div class="card">
+        <p class="quote">“We shipped in one evening and captured 230 signups in a week.”</p>
+        <div class="muted">— Priya, Indie Hacker</div>
+      </div>
+      <div class="card">
+        <p class="quote">“The clean design made our product look legit from day one.”</p>
+        <div class="muted">— Akash, Founder</div>
+      </div>
+      <div class="card">
+        <p class="quote">“No build tools, no headaches. Just copy, paste, deploy.”</p>
+        <div class="muted">— Sara, Marketer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="container">
+    <div class="section-head">
+      <h2>FAQ</h2>
+      <span class="muted">Answers to common questions.</span>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>How do I deploy this?</summary>
+        <p class="muted">Push this file to a GitHub repo and enable GitHub Pages, or drop it onto Netlify/Vercel as a static site.</p>
+      </details>
+      <details>
+        <summary>How can I collect emails?</summary>
+        <p class="muted">Use a service like Formspree, Basin, or connect the form action to Google Forms or your backend.</p>
+      </details>
+      <details>
+        <summary>Can I customize the colors and fonts?</summary>
+        <p class="muted">Yes. Edit the <code>:root</code> variables at the top of the CSS for quick theme changes.</p>
+      </details>
+      <details>
+        <summary>Is there any JavaScript?</summary>
+        <p class="muted">Only a tiny bit to validate the email form and handle smooth scrolling. Everything else is pure HTML/CSS.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA / Email capture -->
+  <section id="cta" class="container cta">
+    <div class="card">
+      <h2>Be first to know when we launch</h2>
+      <p class="muted">Join the waitlist to receive early access and launch updates.</p>
+      <form class="inline-form" id="waitlist-form" onsubmit="return submitEmail(event)">
+        <input type="email" id="email" placeholder="you@example.com" required />
+        <button type="submit">Join Waitlist</button>
+      </form>
+      <p id="form-msg" class="muted" role="status" style="margin-top:8px"></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Why join?</h3>
+      <ul>
+        <li>✅ Early-bird pricing</li>
+        <li>✅ Limited beta slots</li>
+        <li>✅ Direct feedback channel</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="container">
+    <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="year"></span> YourProduct, Inc.</div>
+      <div style="display:flex;gap:14px">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Replace with your real integration
+    function submitEmail(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('form-msg');
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        msg.textContent = 'Please enter a valid email address.';
+        return false;
+      }
+      // Simulate success for MVP demo
+      msg.textContent = 'Thanks! You\'re on the list. (Wire this up to Formspree/Basin/Google Forms later.)';
+      document.getElementById('waitlist-form').reset();
+      return false;
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
